@@ -1,0 +1,82 @@
+// write a function to check if  a number is a prime number 
+"""_summary_
+    Check if a number is prime.
+
+    Args:
+        n (int): _description_
+
+    Returns:
+        bool: _description_
+
+    1. Get the number, n.
+    2. if it's 1 or less than 1, return False
+    3. loop through the numbers from 2 to n+1, 
+    4. if any number divides n without a remainder, return False
+    5. return True
+    To optimize performance and reduce the number of iterations, we can loop through the numbers from 2 to the square root of n.
+"""
+
+// write a function to check if a number is a perfect number
+ """_summary_
+        Check if a number is perfect.
+
+        Args:
+            n (int): _description_
+
+        Returns:
+            bool: _description_
+
+        1. Get the number, n.
+        2. if it's 1 or less than 1, return False
+        3. initialize a variable, sum_divisors, to 1
+        4. loop through the numbers from 2 to n//2+1
+        5. if any number divides n without a remainder, add it to sum_divisors
+        6. if sum_divisors is equal to n, return True
+        7. return False
+ """
+// write a function to check if a number is an amstrong number
+
+["amstrong", "odd"]
+["amstrong", "even"]
+["odd"]
+["even"]
+//
+        """_summary_
+
+        Returns:
+            bool: _description_
+        1. Convert the number to a string
+        2. Convert each digit in the string to an integer and store in a list
+        3. Calculate the sum of each digit raised to the power of the length of the list
+        4. if the sum is equal to the original number, return True
+        5. return False
+
+        """
+
+// write a function to get the sum of the digits
+        """_summary_
+        Calculates the sum of digits of a given number.
+
+        Args:
+            n (int): _description_
+
+        Returns:
+            int: _description_
+
+        1. find the absolute value of n
+        2. convert n to a list of digits
+        3. return the sum of the digits in the list
+        """
+
+// use the fun_fact api to get the .
+        """_summary_
+
+        Returns:
+            str: _description_
+
+        1. Make a get request to the numbersapi.com API with the number and the math endpoint
+        2. return the response text if the status code is 200, else return "No fun fact for you"
+        """
+
+
+then return everything as json
