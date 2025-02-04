@@ -137,13 +137,13 @@ class ClasifyNumber:
 
 @app.get("/api/classify-number")
 def get_number_classes(number: str):
-    if not number.isdigit():
+    if not number.lstrip('-').isdigit():
         return {
-            "number": number,
+            "number": "alphabet",
             "error": True
         }
 
-    num = int(number)
+    num = abs(int(number))
     classifier = ClasifyNumber(num)
     return classifier.classify()
 
