@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 import requests
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -138,10 +138,10 @@ class ClasifyNumber:
 @app.get("/api/classify-number")
 def get_number_classes(number: str):
     if not number.lstrip('-').isdigit():
-        return {
-            "number": "alphabet",
-            "error": True
-        }
+        raise HTTPException(
+            status_code=400,
+            detail={"number": "alphabet", "error": True}
+        )
 
     num = abs(int(number))
     classifier = ClasifyNumber(num)
