@@ -1,6 +1,7 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, status
 import requests
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
 
 app = FastAPI()
@@ -48,6 +49,8 @@ class ClasifyNumber:
         5. return False
 
         """
+        if self.number < 0:
+            return False
         digits = [int(d) for d in str(self.number)]
         return sum(d ** len(digits) for d in digits) == self.number
 
@@ -137,25 +140,26 @@ class ClasifyNumber:
 
 @app.get("/api/classify-number")
 def get_number_classes(number: str):
-    if not number.lstrip('-').isdigit():
-        raise HTTPException(
-            status_code=400,
-            detail={"number": "alphabet", "error": True}
+    try:
+        num = int(number)
+        classifier = ClasifyNumber(num)
+        return classifier.classify()
+    except ValueError:
+        return JSONResponse(
+            content={"number": number, "error": True,
+                     "message": "Invalid input. Please provide an integer."},
+            status_code=status.HTTP_400_BAD_REQUEST
         )
-
-    num = abs(int(number))
-    classifier = ClasifyNumber(num)
-    return classifier.classify()
 
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["GET"],
-    allow_headers=["*"]
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=3000)
